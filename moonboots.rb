@@ -2,7 +2,6 @@
 require('date')
 
 preformatted_text_is_open = false
-
 static_dir = '/home/gemini/gemini-server/static'
 output_dir = '/home/matthew/Dev/personal/gemini/output'
 
@@ -51,6 +50,7 @@ files_found.each do |path|
         # handle links
         # TODO conditional if link href ends in image file extension
         elsif line[0..2].include? "=>"
+            line = line.gsub(".gmi", ".html").gsub("'/", '')
             link_href = line.split(" ")[1]
             link_title = line.split(" ")[2..-1].join(" ")
             total_html_output << "<a href='#{link_href}'>#{link_title}<a/>"
@@ -77,14 +77,17 @@ files_found.each do |path|
     if current_dir != 'static'
         `mkdir #{output_dir}/#{build}/#{current_dir}`
         file = File.new("#{output_dir}/#{build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
+        file.puts("<head>\n</head>\n<body>\n")
         file.puts(total_html_output)
+        file.puts("</body>")
         file.close
     else
         file = File.new("#{output_dir}/#{build}/#{current_file[0...-4]}.html", "w")
+        file.puts("<head>\n</head>\n<body>\n")
         file.puts(total_html_output)
+        file.puts("</body>")
         file.close
     end
     puts "built html page from #{current_file}"
 end
-
 
