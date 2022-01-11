@@ -57,14 +57,13 @@ files_found.each do |path|
         # handle p text
         elsif line.length > 0
             total_html_output << "<p>#{line}</p> \n"
-            total_html_output << "\n"
         #handle empty line
         else
             total_html_output << "<br> \n"
         end
     end
 
-    if current_dir != 'static'
+    if current_dir != 'static' # TODO replace 'static' with user-supplied root dir
         `mkdir #{output_dir}/#{build}/#{current_dir}`
         file = File.new("#{output_dir}/#{build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
         file.puts("<head>\n</head>\n<body>\n")
