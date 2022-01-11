@@ -1,0 +1,26 @@
+* {
+    background-color: midnightblue;
+    color: whitesmoke;
+}
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#content{
+    width: 600px;
+}
+
+p {
+    color: white;
+}
+
+a {
+    color: powderblue;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
