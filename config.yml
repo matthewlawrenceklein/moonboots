@@ -1,0 +1,15 @@
+# the root directory of your static .gmi files
+root-dir : 'absolute/root/directory'
+
+# the output directory of your generated HTML files.
+output-dir : 'absolute/path/to/output'
+
+# list of subfolders relative to your site's root directory
+# note: opening '/' not required
+sub-directories :
+  - 'blog'
+  - 'ask_the_author'
+
+# You can link a global CSS file here, to be included
+# in the <head> of each generated HTML file
+css-file-dir : 'relative/to/index.html'
