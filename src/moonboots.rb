@@ -1,6 +1,6 @@
 #! /usr/bin/ruby
 require('date')
-
+ROOT_TITLE = 'dogbeach.club'
 preformatted_text_is_open = false
 static_dir = '/home/gemini/gemini-server/static'
 output_dir = '/home/matthew/Dev/personal/gemini/output'
@@ -44,7 +44,14 @@ files_found.each do |path|
         # handle links
         # TODO conditional if link href ends in image file extension
         elsif line[0..2].include? "=>"
-            line = line.gsub(".gmi", ".html").sub("/", "")
+            line = line.gsub(".gmi", ".html")
+
+            # remove leading / in the root dir but not in subdirectories
+            # because bc it messes with hierarchical routing
+            if current_dir === 'static' # TODO set to root var
+                line = line .sub("/", "")
+            end
+
             link_href = line.split(" ")[1]
             link_title = line.split(" ")[2..-1].join(" ")
             total_html_output << "<a href='#{link_href}'>#{link_title}<a/> <br> \n"
@@ -66,13 +73,13 @@ files_found.each do |path|
     if current_dir != 'static' # TODO replace 'static' with user-supplied root dir
         `mkdir #{output_dir}/#{build}/#{current_dir}`
         file = File.new("#{output_dir}/#{build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
-        file.puts("<head>\n<link rel='stylesheet' href='/../global.css'>\n</head>\n<body>\n<div id='content'>\n")
+        file.puts("<head>\n<link rel='stylesheet' href='/../global.css'>\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
         file.puts(total_html_output)
         file.puts("</div>\n</body>\n")
         file.close
     else
         file = File.new("#{output_dir}/#{build}/#{current_file[0...-4]}.html", "w")
-        file.puts("<head>\n<link rel='stylesheet' href='/global.css'>\n</head>\n<body>\n<div id='content'>\n")
+        file.puts("<head>\n<link rel='stylesheet' href='/global.css'>\n<title>#{ROOT_TITLE}</title>\n</head>\n<body>\n<div id='content'>\n")
         file.puts(total_html_output)
         file.puts("</div>\n</body>\n")
         file.close
