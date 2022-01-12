@@ -5,6 +5,10 @@ preformatted_text_is_open = false
 static_dir = '/home/gemini/gemini-server/static'
 output_dir = '/home/matthew/Dev/personal/gemini/output'
 
+font_url = "<link rel='preconnect' href='https://fonts.googleapis.com'>\n
+<link rel='preconnect href='https://fonts.gstatic.com' crossorigin>\n
+<link href='https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap' rel='stylesheet'>"
+
 build = "#{Date.today}-site-build"
 system("/bin/zsh", "-c", "mkdir #{output_dir}/#{build}")
 
@@ -73,17 +77,16 @@ files_found.each do |path|
     if current_dir != 'static' # TODO replace 'static' with user-supplied root dir
         `mkdir #{output_dir}/#{build}/#{current_dir}`
         file = File.new("#{output_dir}/#{build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
-        file.puts("<head>\n<link rel='stylesheet' href='/../global.css'>\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
+        file.puts("<head>\n<link rel='stylesheet' href='/../global.css'>\n#{font_url}\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
         file.puts(total_html_output)
         file.puts("</div>\n</body>\n")
         file.close
     else
         file = File.new("#{output_dir}/#{build}/#{current_file[0...-4]}.html", "w")
-        file.puts("<head>\n<link rel='stylesheet' href='/global.css'>\n<title>#{ROOT_TITLE}</title>\n</head>\n<body>\n<div id='content'>\n")
+        file.puts("<head>\n<link rel='stylesheet' href='/global.css'>\n#{font_url}\n<title>#{ROOT_TITLE}</title>\n</head>\n<body>\n<div id='content'>\n")
         file.puts(total_html_output)
         file.puts("</div>\n</body>\n")
         file.close
     end
     puts "built html page from #{current_file}"
 end
-

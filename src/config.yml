@@ -13,3 +13,4 @@ sub-directories :
 # You can link a global CSS file here, to be included
 # in the <head> of each generated HTML file
 css-file-dir : 'relative/to/index.html'
+font-url : 'string'
