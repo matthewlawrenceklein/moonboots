@@ -30,10 +30,10 @@ files_found.each do |path|
         elsif line[0..2] === "```"
             case preformatted_text_is_open
             when false
-                total_html_output << "<pre> \n"
+                total_html_output << "<div class='preformatted'> \n"
                 preformatted_text_is_open = true
             else
-                total_html_output << "</pre> \n"
+                total_html_output << "</div> \n"
                 preformatted_text_is_open = false
             end
         # handle heading #
