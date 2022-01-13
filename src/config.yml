@@ -10,15 +10,17 @@ output-dir : '/home/matthew/Dev/personal/gemini/output'
 
 # list of subfolders relative to your site's root directory
 # note: opening '/' not required
+# generating index automatically will generate an index.html file
+# containing href links to all over html files in directory
 sub-directories :
   blog :
     generate-index-programmatically: true
   ask_the_author:
     generate-index-programmatically: false
 
-# You can link a global CSS file here, to be included
+# You can link a global CSS file here via relative path, to be included
 # in the <head> of each generated HTML file
-css-file-dir : 'relative/to/index.html'
+css-file-path : '/global.css'
 # If you're declaring a global font, here is where you can
 # set the link(s) as a single string with newline delimeters
 font-url : "<link rel='preconnect' href='https://fonts.googleapis.com'>\n
