@@ -76,7 +76,7 @@ class MoonBoots
 
                     # remove leading / in the root dir but not in subdirectories
                     # because bc it messes with hierarchical routing
-                    if current_dir === 'static' # TODO set to root var
+                    if current_dir === @root_dir.split("/")[@root_dir.split("/").length() - 2]
                         line = line .sub("/", "")
                     end
 
@@ -102,7 +102,7 @@ class MoonBoots
     end
 
     def build_html_files(total_html_output, current_dir, current_file)
-        if current_dir != 'static' # TODO replace 'static' with user-supplied root dir
+        if current_dir != @root_dir.split("/")[@root_dir.split("/").length() - 2]
             # `mkdir #{output_dir}/#{build}/#{current_dir}`
             file = File.new("#{@output_dir}/#{@build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
             file.puts("<head>\n<link rel='stylesheet' href='/../global.css'>\n#{@font_url}\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
