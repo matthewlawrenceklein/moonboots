@@ -19,12 +19,17 @@ class MoonBoots
         @build = "#{Date.today}-site-build"
     end
 
+    def bounce ## get it?
+        create_directories()
+    end
+
     def create_directories
         system("/bin/zsh", "-c", "mkdir #{@output_dir}/#{@build}")
 
         @sub_directories.each do |dir|
             system("/bin/zsh", "-c", "mkdir #{@output_dir}/#{build}/#{dir[0]}")
         end
+        get_gemini_files()
     end
 
     def get_gemini_files
@@ -117,8 +122,7 @@ end
 
 mb = MoonBoots.new
 
-mb.create_directories()
-mb.get_gemini_files()
+mb.bounce()
 
 
 
