@@ -1,16 +1,48 @@
 # the root directory of your static .gmi files
-root-dir : 'absolute/root/directory'
+root-dir : '/home/gemini/gemini-server/static'
+
+# html title used for your root directory
+# subdirectory titles will mirror directory name
+root-title : 'my website'
 
 # the output directory of your generated HTML files.
-output-dir : 'absolute/path/to/output'
+output-dir : '/home/matthew/Dev/personal/gemini/output'
 
 # list of subfolders relative to your site's root directory
 # note: opening '/' not required
 sub-directories :
-  - 'blog'
-  - 'ask_the_author'
+  blog :
+    generate-index-programmatically: true
+  ask_the_author:
+    generate-index-programmatically: false
 
 # You can link a global CSS file here, to be included
 # in the <head> of each generated HTML file
 css-file-dir : 'relative/to/index.html'
-font-url : 'string'
+# If you're declaring a global font, here is where you can
+# set the link(s) as a single string with newline delimeters
+font-url : "<link rel='preconnect' href='https://fonts.googleapis.com'>\n
+  <link rel='preconnect href='https://fonts.gstatic.com' crossorigin>\n
+  <link href='https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap' rel='stylesheet'>"
+
+# here we can define custom styling classess to be attached
+# to the generated HTML elements, to be referenced in
+# your CSS file
+styling:
+  h1:
+    - 'some-class'
+  h2:
+    - 'some-class'
+  h3:
+    - 'some-class'
+  p :
+    - 'some-class'
+  a :
+    - 'some-class'
+  # class for preformatted text div
+  preformatted-div :
+    - 'preformatted'
+  container-div :
+    - 'content'
+
+
