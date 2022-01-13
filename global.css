@@ -15,6 +15,7 @@ body {
     padding: 40px;
     width: 700px;
     -webkit-box-shadow: 5px 12px 26px 5px rgba(0,0,0,0.3); 
+    box-shadow: 5px 12px 26px 5px rgba(0,0,0,0.3); 
 }
 
 p {
