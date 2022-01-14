@@ -7,7 +7,7 @@ class MoonBoots
                   :css_file_path, :font_url, :styling, :preformatted_text_is_open,
                   :build
     def initialize
-        config = YAML.load_file('/home/matthew/Dev/personal/gemini/src/config.yml')
+        config = YAML.load_file('/home/matthew/Dev/personal/gemini/moonboots/src/config.yml')
         @root_dir = config['root-dir']
         @root_title = config['root-title']
         @output_dir = config['output-dir']

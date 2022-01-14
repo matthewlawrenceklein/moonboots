@@ -6,7 +6,7 @@ root-dir : '/home/gemini/gemini-server/static'
 root-title : 'my website'
 
 # the output directory of your generated HTML files.
-output-dir : '/home/matthew/Dev/personal/gemini/output'
+output-dir : '/home/matthew/Dev/personal/gemini/moonboots/output'
 
 # list of subfolders relative to your site's root directory
 # note: opening '/' not required
