@@ -12,7 +12,7 @@ class MoonBoots
         @root_title = config['root-title']
         @output_dir = config['output-dir']
         @sub_directories = config['sub-directories']
-        @css_file_path = config['css-file-dir']
+        @css_file_path = config['css-file-path']
         @font_url = config['font-url']
         @styling = config['styling']
         @preformatted_text_is_open = false
@@ -102,8 +102,7 @@ class MoonBoots
     end
 
     def build_html_files(total_html_output, current_dir, current_file)
-        if current_dir != @root_dir.split("/")[@root_dir.split("/").length() - 2]
-            # `mkdir #{output_dir}/#{build}/#{current_dir}`
+        if current_dir != @root_dir.split("/")[@root_dir.split("/").length() - 1]
             file = File.new("#{@output_dir}/#{@build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
             file.puts("<head>\n<link rel='stylesheet' href='/../#{@css_file_path}'>\n#{@font_url}\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
             file.puts(total_html_output)
