@@ -70,7 +70,6 @@ class MoonBoots
                 elsif line[0..2].include? "###"
                     total_html_output << "<h3>#{line[3..-1]}</h3> \n"
                 # handle links
-                # TODO conditional if link href ends in image file extension
                 elsif line[0..2].include? "=>"
                     line = line.gsub(".gmi", ".html")
 
@@ -80,9 +79,15 @@ class MoonBoots
                         line = line .sub("/", "")
                     end
 
-                    link_href = line.split(" ")[1]
-                    link_title = line.split(" ")[2..-1].join(" ")
-                    total_html_output << "<a href='#{link_href}'>#{link_title}<a/> <br> \n"
+                    if line.split(" ")[1][-4..-1].downcase.include?"jpg" or line.split(" ")[1][-4..-1].downcase.include?"png"
+                        link_href = line.split(" ")[1]
+                        link_title = line.split(" ")[2..-1].join(" ")
+                        total_html_output << "<img class='image' src='#{link_href}' alt='#{link_title}'> <br> \n"
+                    else
+                        link_href = line.split(" ")[1]
+                        link_title = line.split(" ")[2..-1].join(" ")
+                        total_html_output << "<a href='#{link_href}'>#{link_title}<a/> <br> \n"
+                    end
                 # handle list item
                 elsif line[0] === "*"
                     total_html_output << "<li>#{line[1..-1]}</li> \n"
@@ -104,7 +109,7 @@ class MoonBoots
     def build_html_files(total_html_output, current_dir, current_file)
         if current_dir != @root_dir.split("/")[@root_dir.split("/").length() - 1]
             file = File.new("#{@output_dir}/#{@build}/#{current_dir}/#{current_file[0...-4]}.html", "w")
-            file.puts("<head>\n<link rel='stylesheet' href='/../#{@css_file_path}'>\n#{@font_url}\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
+            file.puts("<head>\n<link rel='stylesheet' href='../#{@css_file_path}'>\n#{@font_url}\n<title>#{current_dir}</title>\n</head>\n<body>\n<div id='content'>\n")
             file.puts(total_html_output)
             file.puts("</div>\n</body>\n")
             file.close
